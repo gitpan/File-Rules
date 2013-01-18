@@ -7,7 +7,7 @@ use File::Spec;
 use Data::Dump qw( dump );
 use Path::Class;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub new {
     my $class = shift;
@@ -185,7 +185,7 @@ sub _apply_pathname_rule {
     $debug and warn "dirname=$dirname   filename=$filename\n";
 
     if ( $rule->{action} eq 'is' ) {
-        $match = grep { $rule->{re} eq $_ } File::Spec->splitdir($file);
+        $match = $rule->{re} eq $file;
     }
     elsif ( $rule->{action} eq 'contains' ) {
         if ( $file =~ m{$rule->{re}} ) {
